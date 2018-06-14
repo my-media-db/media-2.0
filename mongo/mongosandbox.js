@@ -3,8 +3,19 @@
 const mongoose = require('mongoose');
 
 let movieSchema = mongoose.Schema({
-  movie_id : {type: , required: true}
+  movie_id : {type: int , required: true}
 });
+
+// movieSchema.pre('save', function (next) {
+// 	let movie = this;
+
+//   if (movie.isNew) {
+//    
+// 	} else {
+// 		console.log('movie is already in database')
+// 		next();
+// 	}
+// });
 
 const Movie = mongoose.model('Movies', movieSchema);
 
