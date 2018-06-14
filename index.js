@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URI);
 const PORT = process.env.PORT;
 const express = require('express');
 const bodyParser = require('body-parser');
-const movieRouter = require('./routes/routes.js');
+const movieRouter = require('./routes/routes');
 
 const app = express();
 app.use(bodyParser.json());
