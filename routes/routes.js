@@ -1,12 +1,10 @@
 'use strict';
 
-
 require('dotenv').config();
 
 const express = require('express');
 const superagent = require('superagent');
 const Movie = require('../mongo/mongosandbox');
-const superagent = require('superagent');
 const api_key = process.env.api_key;
 const movieRouter = new express.Router();
 const path = require('path');
