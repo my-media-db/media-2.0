@@ -5,6 +5,9 @@ import 'whatwg-fetch';
 import './style/main.css'
 import ReactDOM from 'react-dom';
 import TimeForm from './timeform.js';
+// import * as Movies from '../routes/routes.js';
+// import Movie from '../mongo/mongosandbox';
+
 // import Test from './test.js';
 // console.log('test' ,Test)
 
@@ -20,16 +23,17 @@ export class Media2 extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-
-  // methods we'll fill in shortly
+//template for setting up fetch request
   fetchCurrentTime() {
     fetch(this.getApiUrl())
     .then(resp => resp.json())
     .then(resp => {
     const currentTime = resp.dateString;
     this.setState({currentTime})
-    });
-    }
+    })
+  }
+
+
 
   getApiUrl() {
     const {tz, msg} = this.state;
