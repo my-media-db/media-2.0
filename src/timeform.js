@@ -13,27 +13,27 @@ export class TimeForm extends React.Component{
       const {tz, msg} = this.props;
       this.state = {tz, msg};
 
-      this._handleFormSubmit = this._handleFormSubmit.bind(this);
-      this._handleCharge = this._handleChange.bind(this);
+      this.handleFormSubmit = this.handleFormSubmit.bind(this);
+      this.handleCharge = this.handleChange.bind(this);
     }
     
 
-    _handleChange(evt) {
+  handleChange(evt) {
       typeof this.props.onFormChange === 'function' && 
       this.props.onFormChange(this.state);
-    };
-
-    _changeTimezone(evt) {
-      const tz = evt.target.value;
-      this.setState({tz}, this._handleChange);
-  }
-
-  _changeMsg(evt) {
-    const msg = encodeURIComponent(evt.target.value).replace(/%20/,'+');
-    this.setState({msg}, this._handleChange);
   };
 
-  _handleFormSubmit(evt) {
+  changeTimezone(evt) {
+      const tz = evt.target.value;
+      this.setState({tz}, this.handleChange);
+  }
+
+  changeMsg(evt) {
+    const msg = encodeURIComponent(evt.target.value).replace(/%20/,'+');
+    this.setState({msg}, this.handleChange);
+  };
+
+  handleFormSubmit(evt) {
     evt.preventDefault();
     typeof this.props.onFormSubmit === 'function' && this.props.onFormSubmit(this.state);
   };
@@ -41,7 +41,7 @@ export class TimeForm extends React.Component{
 render() {
   const {tz}= this.state;
   return(
-    <form onSubmit= {this._handleFormSubmit}>
+    <form onSubmit= {this.handleFormSubmit}>
     <select 
       onChange = {this._changeTimezone}
       defaultValue={tz}>
