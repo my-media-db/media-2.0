@@ -14,6 +14,7 @@ const config = {
   plugins: [new HtmlWebpackPlugin({template: `${__dirname}/index.html`})],
   module: {
     rules: [
+      // {node: {fs: 'empty'}},
       {test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/},
       {test: /\.s?css$/, loader: [
         'style-loader', 'css-loader', 'sass-loader'  // The order of these matters!

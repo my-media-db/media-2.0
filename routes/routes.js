@@ -13,13 +13,13 @@ const fs = require('fs');
 
 
 movieRouter.route('/movie-req').post((req,res) => {
-   console.log('hi');
+  console.log('hi');
   let results = superagent.post(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`);
   return results; 
 })
   .then(results => {
     console.log(results);
-        	return Movie.create({
+    return Movie.create({
       movie_id: results.body[id],
     });
   })

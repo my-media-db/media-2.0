@@ -1,10 +1,14 @@
 'use strict';
 
+require('dotenv').config();
+
 import React from 'react';
 import 'whatwg-fetch';
 import './style/main.css'
 import ReactDOM from 'react-dom';
 import TimeForm from './timeform.js';
+// import * as fs from 'fs';
+
 // import * as Movies from '../routes/routes.js';
 // import Movie from '../mongo/mongosandbox';
 
@@ -26,19 +30,18 @@ export class Media2 extends React.Component {
 //template for setting up fetch request
   fetchCurrentTime() {
     fetch(this.getApiUrl())
-    .then(resp => resp.json())
-    .then(resp => {
-    const currentTime = resp.dateString;
-    this.setState({currentTime})
-    })
+    .then(resp => resp.body)
+    // .then(resp => {
+    //   console.log('body response', resp.body )
+      const currentTime = resp;
+      this.setState({currentTime})
+    
   }
 
-
-
   getApiUrl() {
-    const {tz, msg} = this.state;
-    const host = 'https://andthetimeis.com';
-    return host + '/' + tz + '/' + msg + '.json';
+    const api_key = process.env.api_key;
+    const host = 'https://api.themoviedb.org/3/movie/550?api_key=';
+    return host + api_key;
   }
 
   handleFormSubmit(evt) {
