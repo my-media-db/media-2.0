@@ -16,10 +16,10 @@ export class Media2 extends React.Component {
     this.state = {
       currentTime: null, msg: 'now', tz: 'PST'
     }
+    this.fetchCurrentTime = this.fetchCurrentTime.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-  // this.fetchCurrentTime = this.fetchCurrentTime.bind(this);
-  // this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  // this.handleChange = this.handleChange.bind(this);
 
   // methods we'll fill in shortly
   fetchCurrentTime() {
@@ -28,22 +28,27 @@ export class Media2 extends React.Component {
     .then(resp => {
     const currentTime = resp.dateString;
     this.setState({currentTime})
-    })
+    });
     }
 
   getApiUrl() {
     const {tz, msg} = this.state;
     const host = 'https://andthetimeis.com';
     return host + '/' + tz + '/' + msg + '.json';
-    }
-  handleFormSubmit(evt) {}
-  handleChange(newState) {}
+  }
+
+  handleFormSubmit(evt) {
+    this.fetchCurrentTime();
+  }
+
+  handleChange(newState) {
+    this.setState(newState);
+  }
 
   render() {
-
     const {currentTime, tz} = this.state;
     const apiUrl = this.getApiUrl();
-
+  
     return (
       <div>
         {!currentTime &&
@@ -62,6 +67,7 @@ export class Media2 extends React.Component {
     )
   }
 }
+
 
 const root = document.getElementById('root');
 ReactDOM.render(<Media2/>, root); 

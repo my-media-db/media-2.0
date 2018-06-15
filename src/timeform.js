@@ -15,6 +15,8 @@ export class TimeForm extends React.Component{
 
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
       this.handleCharge = this.handleChange.bind(this);
+      this.changeTimezone = this.changeTimezone.bind(this);
+      this.changeMsg = this.changeMsg.bind(this);
     }
     
 
@@ -43,7 +45,7 @@ render() {
   return(
     <form onSubmit= {this.handleFormSubmit}>
     <select 
-      onChange = {this._changeTimezone}
+      onChange = {this.changeTimezone}
       defaultValue={tz}>
       {timezones.map(t => {
         return (<option key = {t} value ={t}>{t}</option>)
