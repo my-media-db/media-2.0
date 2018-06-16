@@ -23,7 +23,7 @@ export class Media2 extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-//template for setting up fetch request
+
   fetchCurrentTime() {
     fetch(this.getApiUrl())
     .then(resp => resp.json())
@@ -32,7 +32,6 @@ export class Media2 extends React.Component {
     this.setState({currentTime})
     })
   }
-
 
 
   getApiUrl() {

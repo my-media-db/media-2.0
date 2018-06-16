@@ -14,7 +14,7 @@ export class TimeForm extends React.Component{
       this.state = {tz, msg};
 
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
-      this.handleCharge = this.handleChange.bind(this);
+      this.handleChange = this.handleChange.bind(this);
       this.changeTimezone = this.changeTimezone.bind(this);
       this.changeMsg = this.changeMsg.bind(this);
     }
