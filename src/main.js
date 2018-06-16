@@ -5,6 +5,9 @@ import 'whatwg-fetch';
 import './style/main.css'
 import ReactDOM from 'react-dom';
 import TimeForm from './timeform.js';
+// import * as Movies from '../routes/routes.js';
+// import Movie from '../mongo/mongosandbox';
+
 // import Test from './test.js';
 // console.log('test' ,Test)
 
@@ -21,7 +24,6 @@ export class Media2 extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // methods we'll fill in shortly
   fetchCurrentTime() {
     fetch(this.getApiUrl())
     .then(resp => resp.json())
@@ -30,6 +32,7 @@ export class Media2 extends React.Component {
     this.setState({currentTime})
     })
   }
+
 
   getApiUrl() {
     const {tz, msg} = this.state;
@@ -48,7 +51,7 @@ export class Media2 extends React.Component {
   render() {
     const {currentTime, tz} = this.state;
     const apiUrl = this.getApiUrl();
-
+  
     return (
       <div>
         {!currentTime &&
@@ -67,6 +70,7 @@ export class Media2 extends React.Component {
     )
   }
 }
+
 
 const root = document.getElementById('root');
 ReactDOM.render(<Media2/>, root); 

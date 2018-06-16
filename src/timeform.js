@@ -17,14 +17,13 @@ export class TimeForm extends React.Component{
       this.handleChange = this.handleChange.bind(this);
       this.changeTimezone = this.changeTimezone.bind(this);
       this.changeMsg = this.changeMsg.bind(this);
-
     }
     
 
   handleChange(evt) {
       typeof this.props.onFormChange === 'function' && 
       this.props.onFormChange(this.state);
-    };
+  };
 
   changeTimezone(evt) {
       const tz = evt.target.value;
