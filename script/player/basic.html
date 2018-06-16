@@ -24,6 +24,12 @@
       // console.log('input file', fileName);
       // console.log('file path', tmppath);
       console.log('file info:', input.files[0])
+      // const reader = new FileReader();
+      // reader.onload = function () {
+      //   console.log(reader.result);
+      // }
+      // // reader.readAsArrayBuffer(input.files[0]);
+      // reader.readAsDataURL(input.files[0]);
             
       createVideo(tmppath, fileName);
     }, false);
@@ -33,10 +39,12 @@
       child.parentNode.removeChild(child);
 
       let url = videoFile;
+      let height = 720; //9
+      let width = (height*16)/9; //16
       let video = document.createElement('video');
       video.setAttribute('id', 'video-player');
-      video.setAttribute('width', 1280);
-      video.setAttribute('height', 720);
+      video.setAttribute('width', width);
+      video.setAttribute('height', height);
       video.setAttribute('controls', true);
 
       let source = document.createElement('source');
