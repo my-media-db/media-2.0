@@ -11,8 +11,7 @@ const path = require('path');
 const fs = require('fs');
 
 
-
-movieRouter.route('/movie-req').post((req,res) => {
+movieRouter.route('/movie-req').get((req,res) => {
    console.log('hi');
   let results = superagent.post(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`);
   return results; 

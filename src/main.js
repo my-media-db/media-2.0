@@ -37,9 +37,11 @@ export class Media2 extends React.Component {
 // need to figure out how to implement .env variables
   fetchMovie(){
     const api_key = this.state;
-    fetch(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`)
+    
+    fetch('http://localhost:3000/api/movie-req')
     .then(result => {
       const movie = result;
+      console.log(result)
       this.setState({movie})
     })
     .then(result => console.log(result))
@@ -70,7 +72,7 @@ export class Media2 extends React.Component {
 
   render() {
    
-    const {currentTime, tz, movie} = this.state;
+    const {currentTime, tz, movie, api_key} = this.state;
     require(dotenv).config();
     const apiUrl = this.getApiUrl();
   

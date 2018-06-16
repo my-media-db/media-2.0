@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 let movieSchema = mongoose.Schema({
-  movie_id : {type: int , required: true}
+  movie_id : {type: Number , required: true}
 });
 
 // movieSchema.pre('save', function (next) {
