@@ -5,6 +5,7 @@ import 'whatwg-fetch';
 import './style/main.css'
 import ReactDOM from 'react-dom';
 import TimeForm from './timeform.js';
+ 
 // import * as Movies from '../routes/routes.js';
 // import Movie from '../mongo/mongosandbox';
 
@@ -15,9 +16,10 @@ import TimeForm from './timeform.js';
 export class Media2 extends React.Component {
   constructor(props) {
     super(props);
-    
+    //need to handle search variables and search type on time form
     this.state = {
-      currentTime: null, msg: 'now', tz: 'PST'
+      currentTime: null, msg: 'now', tz: 'PST',
+      movie: null, search: null, search_type: null, api_key: process.env.api_key
     }
     this.fetchCurrentTime = this.fetchCurrentTime.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -32,7 +34,23 @@ export class Media2 extends React.Component {
     this.setState({currentTime})
     })
   }
+// need to figure out how to implement .env variables
+  fetchMovie(){
+    const api_key = this.state;
+    fetch(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`)
+    .then(result => {
+      const movie = result;
+      this.setState({movie})
+    })
+    .then(result => console.log(result))
+  }
 
+  getMovieUrl(){
+    // can there be more than one variable that populates this state?
+    const {search,search_type,api_key}  = this.state;
+    const host = 'https://api.themoviedb.org/';
+    return host + '/'+ search_type + '/' + search + '?api_key=' + api_key;
+  }
 
 
   getApiUrl() {
@@ -43,6 +61,7 @@ export class Media2 extends React.Component {
 
   handleFormSubmit(evt) {
     this.fetchCurrentTime();
+    this.fetchMovie();
   }
 
   handleChange(newState) {
@@ -50,8 +69,11 @@ export class Media2 extends React.Component {
   }
 
   render() {
-    const {currentTime, tz} = this.state;
+   
+    const {currentTime, tz, movie} = this.state;
+    require(dotenv).config();
     const apiUrl = this.getApiUrl();
+  
   
     return (
       <div>
@@ -59,7 +81,12 @@ export class Media2 extends React.Component {
           <button onClick={this.fetchCurrentTime}>
             Get the current time
           </button>}
+          {!movie &&
+          <button onClick={this.fetchMovie}>
+            Get Movie
+          </button>}
         {currentTime && <div>The current time is: {currentTime}</div>}
+        {movie && <div>movie is: {movie}</div>}
         <TimeForm
           onFormSubmit={this.handleFormSubmit}
           onFormChange={this.handleChange}
