@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <title>Basic video player</title>
+</head>
+
+<body>
+  <h1>Basic Video Player</h1>
+  <input type="file" id="video">
+  <div id="video-player"></div>
+
+  <script>
+    const input = document.querySelector('input[type="file"]');
+
+    input.addEventListener('change', function (e) {
+      e.preventDefault();
+      let fileName = input.files[0].name;
+      let tmppath = URL.createObjectURL(event.target.files[0]);
+      // console.log('input file', fileName);
+      // console.log('file path', tmppath);
+      console.log('file info:', input.files[0])
+            
+      createVideo(tmppath, fileName);
+    }, false);
+
+    function createVideo(videoFile) {
+      var child = document.getElementById("video-player");
+      child.parentNode.removeChild(child);
+
+      let url = videoFile;
+      let video = document.createElement('video');
+      video.setAttribute('id', 'video-player');
+      video.setAttribute('width', 1280);
+      video.setAttribute('height', 720);
+      video.setAttribute('controls', true);
+
+      let source = document.createElement('source');
+      source.setAttribute('src', url);
+      source.setAttribute('type', 'video/mp4');
+
+      video.appendChild(source);
+      document.body.appendChild(video);
+    };
+  </script>
+</body>
+
+</html>
