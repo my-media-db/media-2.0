@@ -30,6 +30,11 @@ export class TimeForm extends React.Component{
       this.setState({tz}, this.handleChange);
   }
 
+//   changeMovie(evt) {
+//     const movie = evt.target.value;
+//     this.setState({tz}, this.handleChange);
+// }
+
   changeMsg(evt) {
     const msg = encodeURIComponent(evt.target.value).replace(/%20/,'+');
     this.setState({msg}, this.handleChange);

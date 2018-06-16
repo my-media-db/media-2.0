@@ -19,7 +19,11 @@ const config = {
         'style-loader', 'css-loader', 'sass-loader'  // The order of these matters!
       ]}
     ]
+  },
+  devServer: {
+    noInfo: true
   }
 };
+
 
 module.exports = config;
