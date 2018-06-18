@@ -32,7 +32,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack-dev-server --port 3000 --inline --hot --history-api-fallback --open nodemon --ignore dist",
-    "hot": "webpack-dev-server --inline --hot"
+    "hot": "webpack-dev-server --inline --hot",
+    "start": "webpack-dev-server --port 3000 --inline --hot --history-api-fallback --open nodemon --ignore dist"
   },
   "repository": {
     "type": "git",
