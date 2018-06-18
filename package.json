@@ -1,6 +1,6 @@
 {
   "name": "media-2.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This project will combine the functionallity of the media server and client into a single application and refactor the front end to utilize react.",
   "main": "index.js",
   "dependencies": {
