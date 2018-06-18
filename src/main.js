@@ -33,6 +33,19 @@ export class Media2 extends React.Component {
     })
   }
 
+  fetchMovie() {
+    fetch('http://localhost:8080/api/movie-req')
+    .then(resp => resp.json())
+    .then(res => {
+    const movie =  res;
+    console.log('fetch console', res);
+    this.setState({movie})
+    })
+    .catch(err => {
+      console.log('error was thrown', err);
+      res.status(404).send('Sorry, we cannot find that!');
+     });
+  }
 
   getApiUrl() {
     const {tz, msg} = this.state;
@@ -42,30 +55,31 @@ export class Media2 extends React.Component {
 
   handleFormSubmit(evt) {
     this.fetchCurrentTime();
+    this.fetchMovie();
   }
 
   handleChange(newState) {
     this.setState(newState);
   }
 
+      
   render() {
-    const {currentTime, tz} = this.state;
-    const apiUrl = this.getApiUrl();
+    const {movie} = this.state;
   
     return (
       <div>
-        {!currentTime &&
-          <button onClick={this.fetchCurrentTime}>
-            Get the current time
+        {!movie &&
+          <button onClick={this.fetchMovie}>
+            Get Movie
           </button>}
-        {currentTime && <div>The current time is: {currentTime}</div>}
-        <TimeForm
+        {movie && <div>The Movie is: {movie}</div>}
+        {/* <TimeForm
           onFormSubmit={this.handleFormSubmit}
           onFormChange={this.handleChange}
           tz={tz}
           msg={'now'}
-        />
-        <p>We'll be making a request from: <code>{apiUrl}</code></p>
+        /> */}
+        {/* <p>We'll be making a request from: <code>{apiUrl}</code></p> */}
       </div>
     )
   }
