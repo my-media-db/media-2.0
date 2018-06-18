@@ -31,41 +31,24 @@ const fs = require('fs');
 // });
 movieRouter.route('/movie-req').get((req,res) => {
   
-   console.log('hit router');
-   let msg = JSON.stringify('Sorry, we cannot find that');
-   res.send(msg);
+ 
+  let results = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`);
+  return results; 
 })
-//   let results = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`);
-//   return results; 
-// })
-//   .then(results => {
-//     console.log(results);
-//         	return Movie.create({
-//       movie_id: results.body[id],
-//     });
-//   })
-//  .catch(err => {
-//   console.log('error was thrown', err);
-//   res.status(404).send('Sorry, we cannot find that!');
-//  });
+  .then(results => {
+    console.log(results);
+        	return Movie.create({
+      movie_id: results.body[id],
+    });
+  })
+  .catch(err => {
+    console.log('error was thrown', err);
+    res.status(404).send('Sorry, we cannot find that!');
+  });
 
 module.exports = movieRouter;
 
-// old code that was throwing errors, brought in code from caitlin routes branch above 
-// movieRouter.route('/movie-req').post((req,res) => {
-//   console.log('hi');
-//   let results = superagent.post(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`);
-//   return results; 
+// console.log('hit router');
+// let msg = JSON.stringify('Sorry, we cannot find that');
+// res.send(msg);
 // })
-//   .then(results => {
-//     console.log(results);
-//     return Movie.create({
-//       movie_id: results.body[id],
-//     });
-//   })
-//   .catch(err => {
-//     console.log('error was thrown', err);
- 
-//   });
-
-// module.exports = movieRouter;
