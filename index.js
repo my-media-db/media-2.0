@@ -7,7 +7,7 @@ mongoose.connect(process.env.MONGODB_URI);
 const PORT = process.env.PORT;
 const express = require('express');
 const bodyParser = require('body-parser');
-// const movieRouter = require('./routes/routes');
+const movieRouter = require('./routes/routes');
 
 const app = express();
 app.use(bodyParser.json());
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// app.use('/api', movieRouter);
+app.use('/api', movieRouter);
 
 const server = module.exports = {};
 server.isOn = false;
