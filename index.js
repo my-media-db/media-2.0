@@ -2,8 +2,9 @@
 
 require('dotenv').config();
 
-const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MONGODB_URI);
+// require('mongoose').connect(process.env.MONGODB_URI);
 const PORT = process.env.PORT;
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -17,6 +18,13 @@ app.use(bodyParser.urlencoded({
 
 // app.use('/api', movieRouter);
 
+
+app.use(express.static('static'));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/dist/index.html');
+});
+
 const server = module.exports = {};
 server.isOn = false;
 
@@ -26,7 +34,7 @@ server.start = () => {
     server.http = app.listen(PORT, () => {
       console.log(`Listening on ${PORT}`);
       server.isOn = true;
-      mongoose.connect(MONGODB_URI);
+      // mongoose.connect(mongoose);
       return resolve(server);
     });
   });
@@ -36,8 +44,10 @@ server.stop = () => {
     if(!server.isOn) return reject(new Error('Server Error. Server already stopped.'));
     server.http.close(() => {
       server.isOn = false;
-      mongoose.disconnect();
+      // mongoose.disconnect();
       return resolve();
     });
   });
 };
+
+server.start();
