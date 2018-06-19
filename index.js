@@ -5,13 +5,11 @@ require('dotenv').config();
 // const mongoose = require('mongoose');
 // mongoose.connect(process.env.MONGODB_URI);
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const express = require('express');
 const bodyParser = require('body-parser');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
-
-
 
 
 const app = express();
@@ -21,6 +19,19 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use('/api', movieRouter);
+
+// app.use('/', express.static(__dirname, './dist'));
+
+// app.get('/', function (req, res) {
+//   // res.write('<h1>Server is running</h1>');
+//   res.sendFile(__dirname, 'index.html');
+// });
+
+app.use(express.static('./dist'));
+
+app.use((req, res) => {
+  res.sendFile('index.html', { root: './dist' });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
