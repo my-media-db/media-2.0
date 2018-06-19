@@ -14,26 +14,27 @@ const fs = require('fs');
 
 
 movieRouter.route('/movie-req').get((req, res) => {
-  let result = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
-  ).end((err, result) => {
-    // Movie.create({
-    //         movie_id: result.title,
-    //       });
+  let results;
+  let b = api_key;
+  console.log(b || 'no key present');
+   results =  superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
+  )  
+  .end((result, err) => {
     console.log('results from movie db', JSON.parse(result.title));
-    res.send(result);
-
   });
-// .catch(err => {
-//     console.log('error was thrown', err);
-//     res.status(404).send('Sorry, we cannot find that!');
-//   })
-// })
+  res.send(result.text);
+//     .catch((res,err) => {
+//       console.log('error was thrown', err);
+//       res.status(404).send('Sorry, we cannot find that!');
+//     });
+// });
 //   .then(results => {
 //     console.log(results);
 //         	return Movie.create({
 //       movie_id: results.body[id],
-//     });
-});
+})
+
+
 
 
 module.exports = movieRouter;
