@@ -5,7 +5,7 @@ require('dotenv').config();
 // const mongoose = require('mongoose');
 // mongoose.connect(process.env.MONGODB_URI);
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 const express = require('express');
 const bodyParser = require('body-parser');
 const movieRouter = require('./routes/routes');

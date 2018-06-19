@@ -39,14 +39,14 @@ export class Media2 extends React.Component {
     fetch('http://localhost:8080/api/movie-req')
     .then(resp => resp.json())
     .then(res => {
-    const movie = res;
-    console.log('fetch console', res);
+    const movie = res.title;
+    console.log('fetch console', res.title);
     this.setState({movie})
     })
     // .then(res=> {
     //   res.status(200).send(res);
 		// })
-    // .catch(err => {
+    // .catch((res,err) => {
     //   console.log('error was thrown', err);
     //   res.status(404).send('Sorry, we cannot find that!');
     //  });
