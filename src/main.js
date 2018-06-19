@@ -17,9 +17,10 @@ export class Media2 extends React.Component {
     super(props);
     
     this.state = {
-      currentTime: null, msg: 'now', tz: 'PST'
+      currentTime: null, msg: 'now', tz: 'PST', movie: null
     }
     this.fetchCurrentTime = this.fetchCurrentTime.bind(this);
+    this.fetchMovie = this.fetchMovie.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -34,10 +35,11 @@ export class Media2 extends React.Component {
   }
 
   fetchMovie() {
+    console.log('fetch movie result')
     fetch('http://localhost:8080/api/movie-req')
     .then(resp => resp.json())
     .then(res => {
-    const movie =  res;
+    const movie = res;
     console.log('fetch console', res);
     this.setState({movie})
     })
@@ -57,7 +59,7 @@ export class Media2 extends React.Component {
   }
 
   handleFormSubmit(evt) {
-    this.fetchCurrentTime();
+    // this.fetchCurrentTime();
     this.fetchMovie();
   }
 
@@ -67,6 +69,7 @@ export class Media2 extends React.Component {
     
   render() {
     const {movie} = this.state;
+    console.log('Movie', movie);
   
     return (
       <div>
@@ -74,7 +77,7 @@ export class Media2 extends React.Component {
           <button onClick={this.fetchMovie}>
             Get Movie
           </button>}
-        {movie && <div>The Movie is: {movie}</div>}
+        {movie && <div>The Movie is: {movie.title}</div>}
         {/* <TimeForm
           onFormSubmit={this.handleFormSubmit}
           onFormChange={this.handleChange}

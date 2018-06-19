@@ -17,7 +17,7 @@ movieRouter.route('/movie-req').get((req, res) => {
 let result = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
 ).end((err, result) => {
   console.log('results from movie db', JSON.parse(result.text));
-  return result;
+  res.send(result.text);
 
 })
 // .catch(err => {
