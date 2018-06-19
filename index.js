@@ -20,13 +20,6 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use('/api', movieRouter);
 
-// app.use('/', express.static(__dirname, './dist'));
-
-// app.get('/', function (req, res) {
-//   // res.write('<h1>Server is running</h1>');
-//   res.sendFile(__dirname, 'index.html');
-// });
-
 app.use(express.static('./dist'));
 
 app.use((req, res) => {
