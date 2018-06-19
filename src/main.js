@@ -41,10 +41,13 @@ export class Media2 extends React.Component {
     console.log('fetch console', res);
     this.setState({movie})
     })
-    .catch(err => {
-      console.log('error was thrown', err);
-      res.status(404).send('Sorry, we cannot find that!');
-     });
+    // .then(res=> {
+    //   res.status(200).send(res);
+		// })
+    // .catch(err => {
+    //   console.log('error was thrown', err);
+    //   res.status(404).send('Sorry, we cannot find that!');
+    //  });
   }
 
   getApiUrl() {
@@ -61,8 +64,7 @@ export class Media2 extends React.Component {
   handleChange(newState) {
     this.setState(newState);
   }
-
-      
+    
   render() {
     const {movie} = this.state;
   

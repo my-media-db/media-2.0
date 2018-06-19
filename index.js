@@ -11,21 +11,18 @@ const bodyParser = require('body-parser');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
 
-
-
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
 app.use(cors());
 app.use('/api', movieRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
 });
-
 
 // const server = module.exports = {};
 // server.isOn = false;
