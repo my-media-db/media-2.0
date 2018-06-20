@@ -8,10 +8,18 @@ const api_key = process.env.api_key;
 const movieRouter = new express.Router();
 const path = require('path');
 const fs = require('fs');
+
+
+
 movieRouter.route('/movie-req').get((req, res) => {
   let result = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
   ).end((err, result) => {
     console.log('results from movie db', JSON.parse(result.text));
+    let movie = JSON.parse(result.text);
+    Movie.create({
+      movie_id: movie.id,
+    });
+    console.log('results from movie db', movie.id);
     res.send(result.text);
   });
 // .catch(err => {
