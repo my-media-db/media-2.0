@@ -60,12 +60,14 @@ class Media2 extends React.Component {
     // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
         console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
+      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`;
       const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
       const movieTitle = `${data[0].title}`;
       const movieDescription = `${data[0].overview}`;
       const movieReleaseDate = `${data[0].release_date}`;
       const movieAverage = `${data[0].vote_average}`;
       this.setState({
+        bgUrl,
         posterUrl,
         movieTitle,
         movieDescription,
@@ -85,6 +87,24 @@ class Media2 extends React.Component {
   }
 
   movieInformation() {
+    // var BackgroundImage = React.createClass({
+    //     componentWillMount:function(){
+    //       var w = window,
+    //       d = document,
+    //       e = d.documentElement,
+    //       g = d.getElementsByTagName('body')[0],
+    //       x = w.innerWidth || e.clientWidth || g.clientWidth,
+    //       y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+          
+    //       this.setState({x:x,y:y});
+    //     }, 
+    //   });
+
+    //   ReactDOM.render(
+    //     <BackgroundImage/>,
+    //     document.getElementById('root')
+    //   );
+
     return <div id="movie-information">
       {this.state.isLoading && <p>Loading poster...</p>}
       {!this.state.isLoading && this.state.isError && <p>Couldn't find movie poster.</p>}
@@ -128,6 +148,7 @@ class Media2 extends React.Component {
         </label>
       </form>
 
+    <div><img className='bg' src={`'${this.state.bgUrl}'`+this.state.x+'x'+this.state.y+'/?nature'} /></div>
       {!this.state.isPlaying && this.movieInformation()}
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
