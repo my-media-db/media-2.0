@@ -12,27 +12,41 @@ const fs = require('fs');
 
 
 movieRouter.route('/movie-req').get((req, res) => {
-  let result = superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
-  ).end((err, result) => {
-    console.log('results from movie db', JSON.parse(result.text));
-    let movie = JSON.parse(result.text);
-    Movie.create({
-      movie_id: movie.id,
+  let api_result;
+  
+  superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
+  )
+    // .then(result => {
+    //   api_result = JSON.parse(result.text);
+    //   let movie = api_result.id;
+    //   return Movie.create({
+    //     movie_id: movie,
+    //   });
+        
+    //   return result;
+
+    // })  
+    .end((err, result) => {
+      console.log('results from movie db', JSON.parse(result.text));
+   
+      res.send(result.text);
+       
+      return result;
     });
-    console.log('results from movie db', movie.id);
-    res.send(result.text);
-  });
+    
+
+});
 // .catch(err => {
-//     console.log('error was thrown', err);
-//     res.status(404).send('Sorry, we cannot find that!');
-//   })
+//   console.log('error was thrown', err);
+//   res.status(404).send('Sorry, we cannot find that!');
+// });
 // })
 //   .then(results => {
 //     console.log(results);
 //          return Movie.create({
 //       movie_id: results.body[id],
 //     });
-});
+
 module.exports = movieRouter;
 // console.log('hit router');
 // let msg = JSON.stringify('Sorry, we cannot find that');
