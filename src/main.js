@@ -50,12 +50,15 @@ class Media2 extends React.Component {
       posterUrl: undefined,
     });
 
-    // const api_url = 'http://mhzsys.net:21010/api'; // remote
-    const api_url = 'http://192.168.1.10:3000/api'; //local
+    // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
+    // const api_url = 'http://192.168.1.10:3000/api'; //local old server
+    const api_url = 'http://localhost:8080/api'; //local new server
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
     return $.getJSON(`${api_url}/movies/${movieName}`).then(data => {
+    // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
+        console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
       const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
       const movieTitle = `${data[0].title}`;
