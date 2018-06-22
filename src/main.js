@@ -40,7 +40,7 @@ class Media2 extends React.Component {
     console.log(movieName);
 
     this.fetchMovieInfo(movieName[0]);
-    console.log('server:', window.location.href);
+    // console.log('server:', window.location.href);
   }
 
 
@@ -54,7 +54,6 @@ class Media2 extends React.Component {
 
     // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
     // const api_url = 'http://192.168.1.10:3000/api'; //local old server
-    // const api_url = 'http://localhost:8080/api'; //local new server
     const api_url = `${window.location.href}api`; //dynamic
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
@@ -63,7 +62,7 @@ class Media2 extends React.Component {
     // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
         console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
-      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`;
+      const bgUrl = `${images_uri}/w500${data[0].backdrop_path}`;
       const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
       const movieTitle = `${data[0].title}`;
       const movieDescription = `${data[0].overview}`;
@@ -136,9 +135,8 @@ class Media2 extends React.Component {
     return <div id="movie-information">
       {this.state.isLoading && <p>Loading poster...</p>}
       {!this.state.isLoading && this.state.isError && <p>Couldn't find movie poster.</p>}
-      {!this.state.isLoading && this.state.posterUrl &&
-        <img id="movie-poster" onClick={this.playVideo} src={this.state.posterUrl} />
-      }
+      {!this.state.isLoading && this.state.posterUrl && <img id="movie-poster" onClick={this.playVideo} src={this.state.posterUrl}/>}
+      {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
       {!this.state.isLoading && this.state.movieTitle && <h1 id="movie-title">{this.state.movieTitle}</h1>}
       {!this.state.isLoading && this.state.movieDescription && <p id="movie-description">{this.state.movieDescription}</p>}
       {!this.state.isLoading && this.state.movieReleaseDate && <p id="movie-release">Release Date: {this.state.movieReleaseDate}</p>}
@@ -152,6 +150,7 @@ class Media2 extends React.Component {
   }
 
   videoPlayer() {
+    
     // let url = this.state.moviePath;
     let height = 720; //9
     let width = (height * 16) / 9; //16
@@ -161,6 +160,7 @@ class Media2 extends React.Component {
         Sorry your browser doesn't support video.
       </video>
     </div>
+    {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
   }
 
   render() { // JSX
@@ -176,7 +176,6 @@ class Media2 extends React.Component {
         </label>
       </form>
 
-    {/* <div><img className='bg' src={`'${this.state.bgUrl}'`+this.state.x+'x'+this.state.y+'/?nature'} /></div> */}
       {!this.state.isPlaying && this.movieInformation()}
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
