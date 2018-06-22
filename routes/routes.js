@@ -21,7 +21,7 @@ movieRouter.route('/movie-req').get((req, res) => {
      
       api_result = JSON.parse(result.text);
       let movie = api_result.id;
-      return Movie.create({
+      Movie.create({
         movie_id: movie,
       });
       res.send(result.text);
