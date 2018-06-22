@@ -4,13 +4,14 @@ require('dotenv').config();
 
 const PORT = process.env.PORT;
 const express = require('express');
+const handleListen = require('./src/handleListen.js');
+const hello = require('./src/hello');
 const bodyParser = require('body-parser');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
 mongoose.connect(process.env.MONGODB_URI);
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -20,9 +21,11 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use('/api', movieRouter);
 
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Listening on ${PORT}`);
+// });
+app.get('/', hello);
+app.listen(PORT, handleListen(console.log, PORT));
 
 // const server = module.exports = {};
 // server.isOn = false;
