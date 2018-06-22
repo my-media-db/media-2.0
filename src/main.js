@@ -148,7 +148,7 @@ class Media2 extends React.Component {
         </label>
       </form>
 
-    <div><img className='bg' src={`'${this.state.bgUrl}'`+this.state.x+'x'+this.state.y+'/?nature'} /></div>
+    {/* <div><img className='bg' src={`'${this.state.bgUrl}'`+this.state.x+'x'+this.state.y+'/?nature'} /></div> */}
       {!this.state.isPlaying && this.movieInformation()}
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
