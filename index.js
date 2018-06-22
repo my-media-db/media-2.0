@@ -2,23 +2,42 @@
 
 require('dotenv').config();
 
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MONGODB_URI);
+
 const PORT = process.env.PORT;
+const api_key = process.env.api_key;
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const superagent = require('superagent');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const app = express();
-mongoose.connect(process.env.MONGODB_URI);
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(cors());
 app.use('/api', movieRouter);
+
+// gets movies based on user search by title
+app.get('/api/movies/:title', (req, res) => {
+  let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
+  superagent.get(url_search)
+    .then(data => {
+      console.log('api title:', req.params.title)
+      res.send(data.body.results);
+    })
+    .catch(err => console.error(err));
+});
+
+app.use(express.static('./dist'));
+
+app.use('/', (req, res) => {
+  res.sendFile('index.html', { root: './dist' });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
