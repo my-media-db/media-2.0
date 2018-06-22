@@ -40,6 +40,7 @@ class Media2 extends React.Component {
     console.log(movieName);
 
     this.fetchMovieInfo(movieName[0]);
+    console.log('server:', window.location.href);
   }
 
 
@@ -53,7 +54,8 @@ class Media2 extends React.Component {
 
     // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
     // const api_url = 'http://192.168.1.10:3000/api'; //local old server
-    const api_url = 'http://localhost:8080/api'; //local new server
+    // const api_url = 'http://localhost:8080/api'; //local new server
+    const api_url = `${window.location.href}api`; //dynamic
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
@@ -137,10 +139,10 @@ class Media2 extends React.Component {
       {!this.state.isLoading && this.state.posterUrl &&
         <img id="movie-poster" onClick={this.playVideo} src={this.state.posterUrl} />
       }
-      {!this.state.isLoading && this.state.movieTitle && <h1>{this.state.movieTitle}</h1>}
-      {!this.state.isLoading && this.state.movieDescription && <p>{this.state.movieDescription}</p>}
-      {!this.state.isLoading && this.state.movieReleaseDate && <p>Release Date: {this.state.movieReleaseDate}</p>}
-      {!this.state.isLoading && this.state.movieAverage && <p>Popularity: {this.state.movieAverage}</p>}
+      {!this.state.isLoading && this.state.movieTitle && <h1 id="movie-title">{this.state.movieTitle}</h1>}
+      {!this.state.isLoading && this.state.movieDescription && <p id="movie-description">{this.state.movieDescription}</p>}
+      {!this.state.isLoading && this.state.movieReleaseDate && <p id="movie-release">Release Date: {this.state.movieReleaseDate}</p>}
+      {!this.state.isLoading && this.state.movieAverage && <p id="populartiy">Popularity: {this.state.movieAverage}</p>}
     </div>
   }
 
