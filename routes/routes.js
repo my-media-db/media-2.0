@@ -15,23 +15,18 @@ movieRouter.route('/movie-req').get((req, res) => {
   let api_result;
   
   superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
-  )
-    // .then(result => {
-    //   api_result = JSON.parse(result.text);
-    //   let movie = api_result.id;
-    //   return Movie.create({
-    //     movie_id: movie,
-    //   });
-        
-    //   return result;
-
-    // })  
+  ) 
     .end((err, result) => {
       console.log('results from movie db', JSON.parse(result.text));
-   
+     
+      api_result = JSON.parse(result.text);
+      let movie = api_result.id;
+      return Movie.create({
+        movie_id: movie,
+      });
       res.send(result.text);
        
-      return result;
+     
     });
     
 
