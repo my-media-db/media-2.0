@@ -159,8 +159,9 @@ class Media2 extends React.Component {
       <video height={height} width={width} controls src={this.state.moviePath}>
         Sorry your browser doesn't support video.
       </video>
+      {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
     </div>
-    {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
+    
   }
 
   render() { // JSX
