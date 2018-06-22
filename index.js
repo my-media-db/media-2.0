@@ -2,28 +2,34 @@
 
 require('dotenv').config();
 
+// const mongoose = require('mongoose');
+// mongoose.connect(process.env.MONGODB_URI);
+
 const PORT = process.env.PORT;
+const api_key = process.env.api_key;
+
 const express = require('express');
-const handleListen = require('./src/handleListen.js');
-const hello = require('./src/hello');
 const bodyParser = require('body-parser');
+const superagent = require('superagent');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
-const mongoose = require('mongoose');
+const handleListen = require('./src/handleListen.js');
+const hello = require('./src/hello');
 const app = express();
-mongoose.connect(process.env.MONGODB_URI);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(cors());
 app.use('/api', movieRouter);
 
-// app.listen(PORT, () => {
-//   console.log(`Listening on ${PORT}`);
-// });
+app.use(express.static('./dist'));
+
+app.use('/', (req, res) => {
+  res.sendFile('index.html', { root: './dist' });
+});
+
 app.get('/', hello);
 app.listen(PORT, handleListen(console.log, PORT));
 
