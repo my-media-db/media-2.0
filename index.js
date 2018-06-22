@@ -7,19 +7,18 @@ require('dotenv').config();
 
 const PORT = process.env.PORT;
 const api_key = process.env.api_key;
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const superagent = require('superagent');
 const movieRouter = require('./routes/routes');
 const cors = require('cors');
-
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
-
 
 app.use('/api', movieRouter);
 
