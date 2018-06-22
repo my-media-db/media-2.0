@@ -86,18 +86,18 @@ class Media2 extends React.Component {
     });
       
 
-  fetchMovie() {
-    console.log('fetch movie result')
-    fetch('http://localhost:8080/api/movie-req')
-    .then(response => {
-        setTimeout(() => null, 0);  // workaround for issue-6679
-        return response.json();
-      })
-    .then(res => {
-    const movie = res;
-    console.log('fetch console', res);
-    this.setState({movie})
-    })
+//   fetchMovie() {
+//     console.log('fetch movie result')
+//     fetch('http://localhost:8080/api/movie-req')
+//     .then(response => {
+//         setTimeout(() => null, 0);  // workaround for issue-6679
+//         return response.json();
+//       })
+//     .then(res => {
+//     const movie = res;
+//     console.log('fetch console', res);
+//     this.setState({movie})
+//     })
     // .then(res=> {
     //   res.status(200).send(res);
 		// })
