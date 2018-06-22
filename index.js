@@ -22,17 +22,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api', movieRouter);
 
-// gets movies based on user search by title
-app.get('/api/movies/:title', (req, res) => {
-  let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
-  superagent.get(url_search)
-    .then(data => {
-      console.log('api title:', req.params.title)
-      res.send(data.body.results);
-    })
-    .catch(err => console.error(err));
-});
-
 app.use(express.static('./dist'));
 
 app.use('/', (req, res) => {
