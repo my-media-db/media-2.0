@@ -11,11 +11,12 @@ const api_key = process.env.api_key;
 const express = require('express');
 const bodyParser = require('body-parser');
 const superagent = require('superagent');
-const movieRouter = require('./routes/routes');
+const movieRouter = require('./routes/routes.js');
 const cors = require('cors');
 const handleListen = require('./src/handleListen.js');
-const hello = require('./src/hello');
-const app = express();
+const hello = require('./src/hello.js');
+// const app = express();
+const app = require('./src/app.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -30,7 +31,6 @@ app.use('/', (req, res) => {
   res.sendFile('index.html', { root: './dist' });
 });
 
-app.get('/', hello);
 app.listen(PORT, handleListen(console.log, PORT));
 
 // const server = module.exports = {};

@@ -1,7 +1,7 @@
 'use strict';
 
 const request = require('supertest');
-const app = require('./main.js');
+const app = require('./app');
 test('should pass integration tests', (done) => {
   request(app)
     .get('/')

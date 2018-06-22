@@ -34,7 +34,7 @@
   },
   "scripts": {
     "test": "jest src",
-    "coverage": "jest --collectCoverageFrom=src/**.js --coverage src",
+    "coverage": "jest --collectCoverageFrom=src/**.js --collectCoverageFrom=!src/index.js --coverage src",
     "build": "webpack",
     "watch": "webpack-dev-server --port 3000 --inline --hot --history-api-fallback --open nodemon --ignore dist",
     "hot": "webpack-dev-server --inline --hot"
