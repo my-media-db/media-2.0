@@ -89,5 +89,6 @@ create `main.css` file.
     "hot": "webpack-dev-server --inline --hot"
 ```
 
-# From lab folder run webpack
-npx webpack-dev-server --inline --hot --history-api-fallback --open
+# Fix port in use issue
+lsof -i tcp:"port number"
+kill -9 "PID"
