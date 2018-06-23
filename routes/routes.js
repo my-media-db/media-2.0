@@ -46,11 +46,11 @@ movieRouter.use(cors());
 
 
 movieRouter.route('/movies/:title').get((req, res) => {
-  console.log('I have been hit!');
+ 
   let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
   superagent.get(url_search).then(data => {
-      
-    Movie.create({
+    console.log('I have been hit!');
+    let newMovie = new Movie({
       movie_id: data.body.results[0].id,
       bgUrl: data.body.results[0].backdrop_path,
       posterUrl: data.body.results[0].poster_path,
@@ -59,7 +59,11 @@ movieRouter.route('/movies/:title').get((req, res) => {
       movieReleaseDate: data.body.results[0].release_date,
       movieAverage: data.body.results[0].vote_average,
     });
-    console.log('results from api', data[0]);
+    newMovie.save().then(result => {
+      console.log('Save result:', result);
+    }).catch(err => {
+      console.log(err);
+    });
     res.send(data.body.results);
   })
     .catch(err => console.error(err));
@@ -69,3 +73,31 @@ movieRouter.route('/movies/:title').get((req, res) => {
 module.exports = movieRouter;
 
 //
+// var Person = mongoose.model('Person', yourSchema);
+
+// find each person with a last name matching 'Ghost', selecting the `name` and `occupation` fields
+//  Movie.findOne({ 'movieTitle': req.params.title }, 'movie_id bgUrl posterUrl movieTitle movieDescription movieReleaseDate movieAverage', function (err, movie) {
+
+//   if (err) {
+
+//     let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
+//     superagent.get(url_search).then(data => {
+        
+//       Movie.create({
+//         movie_id: data.body.results[0].id,
+//         bgUrl: data.body.results[0].backdrop_path,
+//         posterUrl: data.body.results[0].poster_path,
+//         movieTitle: data.body.results[0].title,
+//         movieDescription: data.body.results[0].overview,
+//         movieReleaseDate: data.body.results[0].release_date,
+//         movieAverage: data.body.results[0].vote_average,
+//       });
+    
+//       res.send(data.body.results);
+//     })
+//       .catch(err => console.error(err));
+//     res.send(movie);
+//   }
+ 
+ 
+// });

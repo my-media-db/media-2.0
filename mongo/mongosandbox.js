@@ -14,17 +14,17 @@ let movieSchema = mongoose.Schema({
   movieAverage : {type : Number}
 });
 
-// movieSchema.pre('save', function (next) {
-// 	let movie = this;
+movieSchema.pre('save', function (next) {
+  let movie = this;
 
-//   if (movie.isNew) {
-//    
-// 	} else {
-// 		console.log('movie is already in database')
-// 		next();
-// 	}
-// });
+  if (movie.isNew) {
+    next();
+  } else {
+    console.log('movie is already in database')
+    next();
+  }
+});
 
-const Movie = mongoose.model('info', movieSchema);
+const Movie = mongoose.model('infos', movieSchema);
 
 module.exports = Movie;
