@@ -179,7 +179,6 @@ class Media2 extends React.Component {
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
   }
-}
 
 const root = document.getElementById('root');
 ReactDOM.render(<Media2 />, root);

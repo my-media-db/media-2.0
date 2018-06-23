@@ -11,9 +11,10 @@ const api_key = process.env.api_key;
 const express = require('express');
 const bodyParser = require('body-parser');
 const superagent = require('superagent');
-const movieRouter = require('./routes/routes');
+const movieRouter = require('./routes/routes.js');
 const cors = require('cors');
-const app = express();
+const handleListen = require('./src/handleListen.js');
+const app = require('./src/app.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -28,9 +29,7 @@ app.use('/', (req, res) => {
   res.sendFile('index.html', { root: './dist' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
-});
+app.listen(PORT, handleListen(console.log, PORT));
 
 // const server = module.exports = {};
 // server.isOn = false;
@@ -58,3 +57,4 @@ app.listen(PORT, () => {
 // };
 
 // server.start();
+module.exports = app;
