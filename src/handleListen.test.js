@@ -6,5 +6,5 @@ test('should call log with Example app...', () => {
   const log = jest.fn();
   handleListen(log, PORT);
   expect(log.mock.calls).toHaveLength(1);
-  expect(log.mock.calls[0][0]).toBe(`Example app listening on port ${PORT.toString()}!`);
+  expect(log.mock.calls[0][0]).toBe(`My-Media 2.0 app listening on port ${PORT.toString()}!`);
 });

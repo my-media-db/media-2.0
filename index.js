@@ -14,8 +14,6 @@ const superagent = require('superagent');
 const movieRouter = require('./routes/routes.js');
 const cors = require('cors');
 const handleListen = require('./src/handleListen.js');
-const hello = require('./src/hello.js');
-// const app = express();
 const app = require('./src/app.js');
 
 app.use(bodyParser.json());
