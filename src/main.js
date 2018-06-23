@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/main.css'
 
-
 class Media2 extends React.Component {
   constructor(props) {
     super(props);
@@ -144,10 +143,12 @@ class Media2 extends React.Component {
       {!this.state.isLoading && this.state.movieAverage && <p>Popularity: {this.state.movieAverage}</p>}
     </div>
   }
+
   playVideo() {
     console.log('playing video');
     this.setState({isPlaying: true});
   }
+
   videoPlayer() {
     // let url = this.state.moviePath;
     let height = 720; //9
@@ -178,7 +179,6 @@ class Media2 extends React.Component {
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
   }
-}
 
 const root = document.getElementById('root');
 ReactDOM.render(<Media2 />, root);
