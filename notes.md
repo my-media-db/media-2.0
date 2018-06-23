@@ -1,3 +1,10 @@
+# TODO list
+1.Be able to search DB by movie title.
+2.Check DB to see if movie title exists before saving to DB to prevent duplicates.
+3.Refactor client to check for data in DB first instead of passthrough.
+4.Attempt to set up testing?
+
+
 # Steps to create react app
 
 1. `npm init -y`
