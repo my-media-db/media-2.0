@@ -18,7 +18,7 @@ movieRouter.route('/movies/:title').get((req, res) => {
 
   console.log(req.params.title, 'heyo');
   let title = req.params.title;
-  Movie.findOne({ title : 'Accepted' }).then(movie => {
+  Movie.findOne({ title : title }).then(movie => {
     let result = movie;
     console.log('db movie', result);
    
