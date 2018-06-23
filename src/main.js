@@ -57,16 +57,18 @@ class Media2 extends React.Component {
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
+    console.log('movie title', movieName);
+
     return $.getJSON(`${api_url}/movies/${movieName}`).then(data => {
     // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
         console.log('url path: ', `${api_url}/movies/${movieName}`);
-      console.log(data[0], 'got search results');
-      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`;
-      const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
-      const movieTitle = `${data[0].title}`;
-      const movieDescription = `${data[0].overview}`;
-      const movieReleaseDate = `${data[0].release_date}`;
-      const movieAverage = `${data[0].vote_average}`;
+      console.log(data, 'got search results');
+      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`|| `${images_uri}/w500}${data.bgUrl.backdrop_path}` ;
+      const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}` ||  `${images_uri}/${img_size}${data.posterUrl.poster_path}`;
+      const movieTitle = `${data[0].title}` || `${data.movieTitle}`;
+      const movieDescription = `${data[0].overview}` || `${data.movieDescription}`;
+      const movieReleaseDate = `${data[0].release_date}` || `${data.movieReleaseDate}`;
+      const movieAverage = `${data[0].vote_average}` || `${data.movieAverage}`;
       this.setState({
         bgUrl,
         posterUrl,
@@ -84,7 +86,7 @@ class Media2 extends React.Component {
         isLoading: false,
       });
     });
-      
+  
 
 //   fetchMovie() {
 //     console.log('fetch movie result')

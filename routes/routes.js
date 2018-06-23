@@ -46,28 +46,38 @@ movieRouter.use(cors());
 
 
 movieRouter.route('/movies/:title').get((req, res) => {
- 
-  let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
-  superagent.get(url_search).then(data => {
-    console.log('I have been hit!');
-    let newMovie = new Movie({
-      movie_id: data.body.results[0].id,
-      bgUrl: data.body.results[0].backdrop_path,
-      posterUrl: data.body.results[0].poster_path,
-      movieTitle: data.body.results[0].title,
-      movieDescription: data.body.results[0].overview,
-      movieReleaseDate: data.body.results[0].release_date,
-      movieAverage: data.body.results[0].vote_average,
-    });
-    newMovie.save().then(result => {
-      console.log('Save result:', result);
-    }).catch(err => {
-      console.log(err);
-    });
-    res.send(data.body.results);
-  })
-    .catch(err => console.error(err));
+
+  console.log(req.params.title, 'heyo');
+  Movie.findOne({ movieTitle : 'Crank' }).then(movie => {
+    console.log('db movie', movie);
+    res.send(movie);
+  });
+
+
+  // let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
+  // superagent.get(url_search).then(data => {
+  //   console.log('I have been hit!');
+  //   let newMovie = new Movie({
+  //     movie_id: data.body.results[0].id,
+  //     bgUrl: data.body.results[0].backdrop_path,
+  //     posterUrl: data.body.results[0].poster_path,
+  //     movieTitle: data.body.results[0].title,
+  //     movieDescription: data.body.results[0].overview,
+  //     movieReleaseDate: data.body.results[0].release_date,
+  //     movieAverage: data.body.results[0].vote_average,
+  //   });
+  //   newMovie.save().then(result => {
+  //     console.log('Save result:', result);
+  //   }).catch(err => {
+  //     console.log(err);
+  //   });
+  //   res.send(data.body.results);
+  // })
+  //   .catch(err => console.error(err));
 });
+
+
+
 
 
 module.exports = movieRouter;

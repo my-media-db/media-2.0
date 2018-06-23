@@ -2,7 +2,7 @@
 
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_URI);
 
 let movieSchema = mongoose.Schema({
   movie_id : {type: Number, required: true},
@@ -14,17 +14,17 @@ let movieSchema = mongoose.Schema({
   movieAverage : {type : Number}
 });
 
-movieSchema.pre('save', function (next) {
-  let movie = this;
+// movieSchema.pre('save', function (next) {
+//   let movie = this;
 
-  if (movie.isNew) {
-    next();
-  } else {
-    console.log('movie is already in database')
-    next();
-  }
-});
+//   if (movie.isNew) {
+//     next();
+//   } else {
+//     console.log('movie is already in database')
+//     next();
+//   }
+// });
 
-const Movie = mongoose.model('infos', movieSchema);
+const Movie = mongoose.model('info', movieSchema);
 
 module.exports = Movie;
