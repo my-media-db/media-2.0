@@ -1,6 +1,6 @@
 'use strict';
 
-const handleListen = require('./handleListen');
+const handleListen = require('../handleListen');
 test('should call log with Example app...', () => {
   const PORT = 3000;
   const log = jest.fn();

@@ -1,6 +1,6 @@
 'use strict';
 
-const hello = require('./hello');
+const hello = require('../hello');
 test('should call res.send() with Hello World!', () => {
   const send = jest.fn();
   const res = {
