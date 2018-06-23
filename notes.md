@@ -92,3 +92,18 @@ create `main.css` file.
 # Fix port in use issue
 lsof -i tcp:"port number"
 kill -9 "PID"
+
+# --mongodb terminal commands--
+mongo
+-list databases-
+show dbs
+-enter db-
+use 'db-name'
+-shows collections in the DB
+show collections
+bd.getCollectionNames()
+-show information inside collection
+db.'collection-name'.find()
+
+db.createCollection('name')
+bd.'name'.

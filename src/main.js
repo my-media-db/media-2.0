@@ -14,7 +14,7 @@ class Media2 extends React.Component {
       isLoading: false,
       // have we switched from viewing the poster to viewing the movie?
       isPlaying: false,
-      bgUrl: `${window.location.href}api/img/wallpaper-01.jpg`, //need to have it randomly select a bg image.
+      bgUrl: `${window.location.href}api/img/wallpaper-0${Math.round(Math.random()*5)}.jpg`, //need to have it randomly select a bg image.
     }
     this.handleChange = this.handleChange.bind(this);
     this.fetchMovieInfo = this.fetchMovieInfo.bind(this);

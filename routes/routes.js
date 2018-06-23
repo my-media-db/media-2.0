@@ -17,7 +17,7 @@ movieRouter.use(cors());
 movieRouter.route('/movie-req').get((req, res) => {
   let api_result;
   superagent.get(`https://api.themoviedb.org/3/movie/550?api_key=${api_key}`
-  ) 
+  )
     .end((err, result) => {
       console.log('results from movie db', JSON.parse(result.text));
       api_result = JSON.parse(result.text);
@@ -35,7 +35,7 @@ movieRouter.route('/movies/:title').get((req, res) => {
     .then(data => {
       // console.log(req.params.title)
       res.send(data.body.results);
-      // console.log('movieRouter Results: ', data.body.results);
+      console.log('movieRouter Results: ', data.body.results);
       // console.log('movieRouter Title: ', data.body.results[0].title);
       // the results that will be pushed to local database
       const newMovie = new Movie({
@@ -64,17 +64,17 @@ movieRouter.route('/movie-lookup/:title').get((req, res) => {
   mongoose.connect(process.env.MONGODB_URI, (err, db) => {
     console.log('databse connected');
     db.collection('infos').findOne({
-      _id:'',
-      'movieTitle':toCheck
-    }), function(err, doc) {
-    console.log('Searching Databse');
-    if(err) throw err;
-    console.log('Search Result: ', doc);
-    db.close();
-    console.log('Databse closed');
+      _id: '',
+      'movieTitle': toCheck
+    }), function (err, doc) {
+      console.log('Searching Databse');
+      if (err) throw err;
+      console.log('Search Result: ', doc);
+      db.close();
+      console.log('Databse closed');
     };
-  })
-  
+  });
+
 
 
   // Movie.findOne(
@@ -140,7 +140,7 @@ module.exports = movieRouter;
 //     console.log('results from movie db', JSON.parse(result.title));
 //     res.send(result.text);
 //   })
-  
+
 
 //   // .catch(err => {
 //   //     console.log('error was thrown', err);
