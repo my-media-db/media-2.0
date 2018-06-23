@@ -63,12 +63,12 @@ class Media2 extends React.Component {
     // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
         console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data, 'got search results');
-      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`|| `${images_uri}/w500}${data.bgUrl.backdrop_path}` ;
-      const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}` ||  `${images_uri}/${img_size}${data.posterUrl.poster_path}`;
-      const movieTitle = `${data[0].title}` || `${data.movieTitle}`;
-      const movieDescription = `${data[0].overview}` || `${data.movieDescription}`;
-      const movieReleaseDate = `${data[0].release_date}` || `${data.movieReleaseDate}`;
-      const movieAverage = `${data[0].vote_average}` || `${data.movieAverage}`;
+      const bgUrl = `${images_uri}/w500}${data.backdrop_path}` ;
+      const posterUrl = `${images_uri}/${img_size}${data.poster_path}` ;
+      const movieTitle = `${data.title}`;
+      const movieDescription = `${data.overview}`;
+      const movieReleaseDate = `${data.release_date}`;
+      const movieAverage = `${data.vote_average}`;
       this.setState({
         bgUrl,
         posterUrl,

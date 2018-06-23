@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 // mongoose.connect(process.env.MONGODB_URI);
 
 let movieSchema = mongoose.Schema({
-  movie_id : {type: Number, required: true},
-  bgUrl : {type : String},
-  posterUrl : {type : String},
-  movieTitle : {type : String},
-  movieDescription : {type : String},
-  movieReleaseDate : {},
-  movieAverage : {type : Number}
+  id: {type: Number, required: true},
+  backdrop_path: {type : String},
+  poster_path: {type : String},
+  title :  {type : String},
+  overview: {type : String},
+  release_date: {},
+  vote_average: {type : Number}
 });
 
 // movieSchema.pre('save', function (next) {
@@ -25,6 +25,6 @@ let movieSchema = mongoose.Schema({
 //   }
 // });
 
-const Movie = mongoose.model('info', movieSchema);
+const Movie = mongoose.model('realdb', movieSchema);
 
 module.exports = Movie;
