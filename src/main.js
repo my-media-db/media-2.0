@@ -61,14 +61,13 @@ class Media2 extends React.Component {
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
-    console.log('movie title', movieName);
+    console.log('movie title:', movieName);
 
     return $.getJSON(`${api_url}/movies/${movieName}`).then(data => {
-    // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
-        console.log('url path: ', `${api_url}/movies/${movieName}`);
-      console.log(data, 'got search results');
-      const bgUrl = `${images_uri}/w500}${data.backdrop_path}` ;
-      const posterUrl = `${images_uri}/${img_size}${data.poster_path}` ;
+      console.log('url path: ', `${api_url}/movies/${movieName}`);
+      console.log(data[0], 'got search results');
+      const bgUrl = `${images_uri}/w500${data.backdrop_path}`;
+      const posterUrl = `${images_uri}/${img_size}${data.poster_path}`;
       const movieTitle = `${data.title}`;
       const movieDescription = `${data.overview}`;
       const movieReleaseDate = `${data.release_date}`;
@@ -90,28 +89,6 @@ class Media2 extends React.Component {
         isLoading: false,
       });
     });
-  
-
-//   fetchMovie() {
-//     console.log('fetch movie result')
-//     fetch('http://localhost:8080/api/movie-req')
-//     .then(response => {
-//         setTimeout(() => null, 0);  // workaround for issue-6679
-//         return response.json();
-//       })
-//     .then(res => {
-//     const movie = res;
-//     console.log('fetch console', res);
-//     this.setState({movie})
-//     })
-    // .then(res=> {
-    //   res.status(200).send(res);
-		// })
-    // .catch(err => {
-    //   console.log('error was thrown', err);
-    //   res.status(404).send('Sorry, we cannot find that!');
-    //  });
-
   }
 
   movieInformation() {
