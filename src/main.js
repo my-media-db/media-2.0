@@ -14,10 +14,10 @@ class Media2 extends React.Component {
       isLoading: false,
       // have we switched from viewing the poster to viewing the movie?
       isPlaying: false,
+      bgUrl: `${window.location.href}api/img/wallpaper-01.jpg`, //need to have it randomly select a bg image.
     }
     this.handleChange = this.handleChange.bind(this);
     this.fetchMovieInfo = this.fetchMovieInfo.bind(this);
-
     this.movieInformation = this.movieInformation.bind(this);
     this.playVideo = this.playVideo.bind(this);
     this.videoPlayer = this.videoPlayer.bind(this);
@@ -40,6 +40,7 @@ class Media2 extends React.Component {
     console.log(movieName);
 
     this.fetchMovieInfo(movieName[0]);
+    // console.log('server:', window.location.href);
   }
 
 
@@ -49,11 +50,12 @@ class Media2 extends React.Component {
       isError: false,
       isLoading: true,
       posterUrl: undefined,
+      isPlaying: false,
     });
 
     // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
     // const api_url = 'http://192.168.1.10:3000/api'; //local old server
-    const api_url = 'http://localhost:8080/api'; //local new server
+    const api_url = `${window.location.href}api`; //dynamic
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
@@ -61,7 +63,7 @@ class Media2 extends React.Component {
     // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
         console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
-      const bgUrl = `${images_uri}/w500}${data[0].backdrop_path}`;
+      const bgUrl = `${images_uri}/w500${data[0].backdrop_path}`;
       const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
       const movieTitle = `${data[0].title}`;
       const movieDescription = `${data[0].overview}`;
@@ -134,13 +136,12 @@ class Media2 extends React.Component {
     return <div id="movie-information">
       {this.state.isLoading && <p>Loading poster...</p>}
       {!this.state.isLoading && this.state.isError && <p>Couldn't find movie poster.</p>}
-      {!this.state.isLoading && this.state.posterUrl &&
-        <img id="movie-poster" onClick={this.playVideo} src={this.state.posterUrl} />
-      }
-      {!this.state.isLoading && this.state.movieTitle && <h1>{this.state.movieTitle}</h1>}
-      {!this.state.isLoading && this.state.movieDescription && <p>{this.state.movieDescription}</p>}
-      {!this.state.isLoading && this.state.movieReleaseDate && <p>Release Date: {this.state.movieReleaseDate}</p>}
-      {!this.state.isLoading && this.state.movieAverage && <p>Popularity: {this.state.movieAverage}</p>}
+      {!this.state.isLoading && this.state.posterUrl && <img id="movie-poster" onClick={this.playVideo} src={this.state.posterUrl}/>}
+      {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
+      {!this.state.isLoading && this.state.movieTitle && <h1 id="movie-title">{this.state.movieTitle}</h1>}
+      {!this.state.isLoading && this.state.movieDescription && <p id="movie-description">{this.state.movieDescription}</p>}
+      {!this.state.isLoading && this.state.movieReleaseDate && <p id="movie-release">Release Date: {this.state.movieReleaseDate}</p>}
+      {!this.state.isLoading && this.state.movieAverage && <p id="populartiy">Popularity: {this.state.movieAverage}</p>}
     </div>
   }
 
@@ -150,15 +151,18 @@ class Media2 extends React.Component {
   }
 
   videoPlayer() {
+    
     // let url = this.state.moviePath;
-    let height = 720; //9
+    let height = 480; //9
     let width = (height * 16) / 9; //16
     console.log('video location:', this.state.moviePath)
     return <div id="video-player">
       <video height={height} width={width} controls src={this.state.moviePath}>
         Sorry your browser doesn't support video.
       </video>
+      {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
     </div>
+    
   }
 
   render() { // JSX
@@ -167,6 +171,7 @@ class Media2 extends React.Component {
       <p>Choose a local video video file to play in web browser.</p>
       <p>to increase sucess of finding proper movie information ensure the movies file name is spelled correctly.</p>
       <p>Example: Jurassic World Fallen Kingdom (2018).mp4</p>
+      <img className="bg" src={this.state.bgUrl}/>
 
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -174,11 +179,11 @@ class Media2 extends React.Component {
         </label>
       </form>
 
-    {/* <div><img className='bg' src={`'${this.state.bgUrl}'`+this.state.x+'x'+this.state.y+'/?nature'} /></div> */}
       {!this.state.isPlaying && this.movieInformation()}
       {this.state.isPlaying && this.videoPlayer()}
     </div>;
   }
+}
 
 const root = document.getElementById('root');
 ReactDOM.render(<Media2 />, root);
