@@ -12,6 +12,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const superagent = require('superagent');
 const movieRouter = require('./routes/routes');
+const imageRouter = require('./routes/images');
 const cors = require('cors');
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/api', movieRouter);
+app.use('/api', imageRouter);
 
 app.use(express.static('./dist'));
 

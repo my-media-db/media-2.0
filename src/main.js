@@ -14,10 +14,10 @@ class Media2 extends React.Component {
       isLoading: false,
       // have we switched from viewing the poster to viewing the movie?
       isPlaying: false,
+      bgUrl: `${window.location.href}api/img/wallpaper-01.jpg`, //need to have it randomly select a bg image.
     }
     this.handleChange = this.handleChange.bind(this);
     this.fetchMovieInfo = this.fetchMovieInfo.bind(this);
-
     this.movieInformation = this.movieInformation.bind(this);
     this.playVideo = this.playVideo.bind(this);
     this.videoPlayer = this.videoPlayer.bind(this);
@@ -50,6 +50,7 @@ class Media2 extends React.Component {
       isError: false,
       isLoading: true,
       posterUrl: undefined,
+      isPlaying: false,
     });
 
     // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
@@ -152,7 +153,7 @@ class Media2 extends React.Component {
   videoPlayer() {
     
     // let url = this.state.moviePath;
-    let height = 720; //9
+    let height = 480; //9
     let width = (height * 16) / 9; //16
     console.log('video location:', this.state.moviePath)
     return <div id="video-player">
@@ -170,6 +171,7 @@ class Media2 extends React.Component {
       <p>Choose a local video video file to play in web browser.</p>
       <p>to increase sucess of finding proper movie information ensure the movies file name is spelled correctly.</p>
       <p>Example: Jurassic World Fallen Kingdom (2018).mp4</p>
+      <img className="bg" src={this.state.bgUrl}/>
 
       <form onSubmit={this.handleSubmit}>
         <label>
