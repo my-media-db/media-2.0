@@ -21,6 +21,7 @@ class Media2 extends React.Component {
     this.movieInformation = this.movieInformation.bind(this);
     this.playVideo = this.playVideo.bind(this);
     this.videoPlayer = this.videoPlayer.bind(this);
+    this.videoPlayerSize = this.videoPlayerSize.bind(this);
   }
 
   handleChange(event) {
@@ -78,6 +79,7 @@ class Media2 extends React.Component {
         movieAverage,
         isError: false,
         isLoading: false,
+        videoHeight: 480,
       })
     }).catch(err => {
       console.error(err)
@@ -151,19 +153,26 @@ class Media2 extends React.Component {
   }
 
   videoPlayer() {
-    
     // let url = this.state.moviePath;
-    let height = 480; //9
-    let width = (height * 16) / 9; //16
+    // this.setState({videoHeight: 480})
+    // let height = 480; //9
+    let width = (this.state.videoHeight * 16) / 9; //16
     console.log('video location:', this.state.moviePath)
     return <div id="video-player">
-      <video height={height} width={width} controls src={this.state.moviePath}>
+      <video height={this.state.videoHeight} width={width} controls src={this.state.moviePath}>
         Sorry your browser doesn't support video.
       </video>
       {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
+      <br></br>
+      <button onClick={() => this.videoPlayerSize(480)}>480p</button>
+      <button onClick={() => this.videoPlayerSize(720)}>720p</button>
+      <button onClick={() => this.videoPlayerSize(1080)}>1080p</button>
     </div>
-    
   }
+
+  videoPlayerSize(size) {
+    this.setState({videoHeight: size});
+  };
 
   render() { // JSX
     return <div id="body">

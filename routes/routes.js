@@ -35,7 +35,7 @@ movieRouter.route('/movies/:title').get((req, res) => {
     .then(data => {
       // console.log(req.params.title)
       res.send(data.body.results);
-      console.log('movieRouter Results: ', data.body.results);
+      // console.log('movieRouter Results: ', data.body.results);
       // console.log('movieRouter Title: ', data.body.results[0].title);
       // the results that will be pushed to local database
       const newMovie = new Movie({
@@ -47,7 +47,7 @@ movieRouter.route('/movies/:title').get((req, res) => {
         movieReleaseDate: data.body.results[0].release_date,
         movieAverage: data.body.results[0].vote_average,
       });
-      // method to actually save the data to mongodb **works only commented out to prevent duplicates.
+      // method to actually save the data to mongodb **works, only commented out to prevent duplicates.
       // newMovie.save().then(result => {
       //   console.log('Save result:', result);
       // }).catch(err => {
