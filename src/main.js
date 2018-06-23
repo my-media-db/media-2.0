@@ -61,15 +61,17 @@ class Media2 extends React.Component {
     const images_uri = 'http://image.tmdb.org/t/p'
     const img_size = '/w300'
 
+    console.log('movie title:', movieName);
+
     return $.getJSON(`${api_url}/movies/${movieName}`).then(data => {
       console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
-      const bgUrl = `${images_uri}/w500${data[0].backdrop_path}`;
-      const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
-      const movieTitle = `${data[0].title}`;
-      const movieDescription = `${data[0].overview}`;
-      const movieReleaseDate = `${data[0].release_date}`;
-      const movieAverage = `${data[0].vote_average}`;
+      const bgUrl = `${images_uri}/w500${data.backdrop_path}`;
+      const posterUrl = `${images_uri}/${img_size}${data.poster_path}`;
+      const movieTitle = `${data.title}`;
+      const movieDescription = `${data.overview}`;
+      const movieReleaseDate = `${data.release_date}`;
+      const movieAverage = `${data.vote_average}`;
       this.setState({
         bgUrl,
         posterUrl,
