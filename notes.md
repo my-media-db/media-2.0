@@ -1,3 +1,10 @@
+# TODO list
+1.Be able to search DB by movie title.
+2.Check DB to see if movie title exists before saving to DB to prevent duplicates.
+3.Refactor client to check for data in DB first instead of passthrough.
+4.Attempt to set up testing?
+
+
 # Steps to create react app
 
 1. `npm init -y`
@@ -82,5 +89,21 @@ create `main.css` file.
     "hot": "webpack-dev-server --inline --hot"
 ```
 
-# From lab folder run webpack
-npx webpack-dev-server --inline --hot --history-api-fallback --open
+# Fix port in use issue
+lsof -i tcp:"port number"
+kill -9 "PID"
+
+# --mongodb terminal commands--
+mongo
+-list databases-
+show dbs
+-enter db-
+use 'db-name'
+-shows collections in the DB
+show collections
+bd.getCollectionNames()
+-show information inside collection
+db.'collection-name'.find()
+
+db.createCollection('name')
+bd.'name'.

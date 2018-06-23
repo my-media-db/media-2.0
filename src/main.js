@@ -14,13 +14,14 @@ class Media2 extends React.Component {
       isLoading: false,
       // have we switched from viewing the poster to viewing the movie?
       isPlaying: false,
-      bgUrl: `${window.location.href}api/img/wallpaper-01.jpg`, //need to have it randomly select a bg image.
+      bgUrl: `${window.location.href}api/img/wallpaper-0${Math.round(Math.random()*5)}.jpg`, //need to have it randomly select a bg image.
     }
     this.handleChange = this.handleChange.bind(this);
     this.fetchMovieInfo = this.fetchMovieInfo.bind(this);
     this.movieInformation = this.movieInformation.bind(this);
     this.playVideo = this.playVideo.bind(this);
     this.videoPlayer = this.videoPlayer.bind(this);
+    this.videoPlayerSize = this.videoPlayerSize.bind(this);
   }
 
   handleChange(event) {
@@ -51,6 +52,7 @@ class Media2 extends React.Component {
       isLoading: true,
       posterUrl: undefined,
       isPlaying: false,
+      videoHeight: 480,
     });
 
     // const api_url = 'http://mhzsys.net:21010/api'; // remote old server
@@ -60,8 +62,7 @@ class Media2 extends React.Component {
     const img_size = '/w300'
 
     return $.getJSON(`${api_url}/movies/${movieName}`).then(data => {
-    // return $.getJSON(`${api_url}/movie-req/${movieName}`).then(data => {
-        console.log('url path: ', `${api_url}/movies/${movieName}`);
+      console.log('url path: ', `${api_url}/movies/${movieName}`);
       console.log(data[0], 'got search results');
       const bgUrl = `${images_uri}/w500${data[0].backdrop_path}`;
       const posterUrl = `${images_uri}/${img_size}${data[0].poster_path}`;
@@ -86,53 +87,9 @@ class Media2 extends React.Component {
         isLoading: false,
       });
     });
-      
-
-//   fetchMovie() {
-//     console.log('fetch movie result')
-//     fetch('http://localhost:8080/api/movie-req')
-//     .then(response => {
-//         setTimeout(() => null, 0);  // workaround for issue-6679
-//         return response.json();
-//       })
-//     .then(res => {
-//     const movie = res;
-//     console.log('fetch console', res);
-//     this.setState({movie})
-//     })
-    // .then(res=> {
-    //   res.status(200).send(res);
-		// })
-    // .catch(err => {
-    //   console.log('error was thrown', err);
-    //   res.status(404).send('Sorry, we cannot find that!');
-    //  });
-
   }
-  // fetch(url).then(response => {
-  //   setTimeout(() => null, 0);  // workaround for issue-6679
-  //   return response.json();
-  // })
 
   movieInformation() {
-    // var BackgroundImage = React.createClass({
-    //     componentWillMount:function(){
-    //       var w = window,
-    //       d = document,
-    //       e = d.documentElement,
-    //       g = d.getElementsByTagName('body')[0],
-    //       x = w.innerWidth || e.clientWidth || g.clientWidth,
-    //       y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-          
-    //       this.setState({x:x,y:y});
-    //     }, 
-    //   });
-
-    //   ReactDOM.render(
-    //     <BackgroundImage/>,
-    //     document.getElementById('root')
-    //   );
-
     return <div id="movie-information">
       {this.state.isLoading && <p>Loading poster...</p>}
       {!this.state.isLoading && this.state.isError && <p>Couldn't find movie poster.</p>}
@@ -151,19 +108,24 @@ class Media2 extends React.Component {
   }
 
   videoPlayer() {
-    
-    // let url = this.state.moviePath;
-    let height = 480; //9
-    let width = (height * 16) / 9; //16
+    let width = (this.state.videoHeight * 16) / 9; //16
     console.log('video location:', this.state.moviePath)
     return <div id="video-player">
-      <video height={height} width={width} controls src={this.state.moviePath}>
+      <video height={this.state.videoHeight} width={width} controls src={this.state.moviePath}>
         Sorry your browser doesn't support video.
       </video>
       {!this.state.isLoading && this.state.posterUrl && <img className="bg" src={this.state.bgUrl}/>}
+      <br></br>
+      <button onClick={() => this.videoPlayerSize(320)}>320p</button>
+      <button onClick={() => this.videoPlayerSize(480)}>480p</button>
+      <button onClick={() => this.videoPlayerSize(720)}>720p</button>
+      <button onClick={() => this.videoPlayerSize(1080)}>1080p</button>
     </div>
-    
   }
+
+  videoPlayerSize(size) {
+    this.setState({videoHeight: size});
+  };
 
   render() { // JSX
     return <div id="body">
