@@ -5,7 +5,13 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI);
 
 let movieSchema = mongoose.Schema({
-  movie_id : {type: Number, required: true}
+  movie_id : {type: Number, required: true},
+  bgUrl : {type : String},
+  posterUrl : {type : String},
+  movieTitle : {type : String},
+  movieDescription : {type : String},
+  movieReleaseDate : {},
+  movieAverage : {type : Number}
 });
 
 // movieSchema.pre('save', function (next) {
@@ -19,6 +25,6 @@ let movieSchema = mongoose.Schema({
 // 	}
 // });
 
-const Movie = mongoose.model('movies', movieSchema);
+const Movie = mongoose.model('info', movieSchema);
 
 module.exports = Movie;
