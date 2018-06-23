@@ -27,6 +27,7 @@ movieRouter.route('/movie-req').get((req, res) => {
     });
 });
 
+
 movieRouter.route('/movies/:title').get((req, res) => {
   let url_search = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${req.params.title}`;
   superagent.get(url_search)
